@@ -102,5 +102,16 @@ spring.activemq.broker-url=vm://localhost?broker.persistent=false
 
 The biggest change came in the _EmailMessageConverter_. It now extends _MappingJackson2MessageConverter_ which converts the sent _Email_ -> JMS message. Also had to beef up the logic to convert a JMS message -> _Email_ because the message sent in the test is a _BytesMessage_ and not a _TextMessage_.
 
+## 06-rest-call
+
+After getting the message make a REST call.
+
+To keep this simple called 
+
+```
+http://worldclockapi.com/api/json/utc/now
+```
+
+
 
 .

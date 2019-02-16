@@ -27,6 +27,7 @@ ext {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-activemq'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok:1.18.2'
 	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
