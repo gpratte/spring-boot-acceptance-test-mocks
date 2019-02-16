@@ -28,4 +28,5 @@ public class JmsListenerConfig {
     public MessageConverter messageConverter() {
         return new EmailMessageConverter();
     }
+
 }
