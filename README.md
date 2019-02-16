@@ -48,10 +48,12 @@ Started the ActiveMQ server. In the ActiveMQ browser created a mailbox queue.
 Brought up Spring Boot and no complaints.
 
 In the ActiveMQ browser set the Type to TEXT and set the body to
+```
 {  
    "to" : "gpratte",
    "body" : "hi there"
 }
+```
 and hit send.
 
 Here is a screen shot 
@@ -61,7 +63,17 @@ Here is a screen shot
 Spring boot complains 
 `MessageConversionException: Could not find type id property [_type]`
 
+## 03-message-converter
+
+Tried to resolve the message conversion problem a few different ways to no avail.
+
+Finally decided to roll my own converter. Changed the configuration to use the new EmailMessageConverter class.
+
+Now the message posted to the mailbox queue is converted into an Email object.
+
+__Note:__ If running server in IntelliJ remember to _Enable annotation processing_ to get Lombok to work.
 
 
 
-x
+
+.
