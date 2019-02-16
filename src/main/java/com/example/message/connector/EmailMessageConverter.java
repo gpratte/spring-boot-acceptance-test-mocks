@@ -2,7 +2,6 @@ package com.example.message.connector;
 
 import com.example.message.model.Email;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.activemq.command.ActiveMQTextMessage;
 import org.springframework.jms.support.converter.MessageConversionException;
 import org.springframework.jms.support.converter.MessageConverter;
 
@@ -26,7 +25,7 @@ public class EmailMessageConverter implements MessageConverter {
 
         Email email = null;
         if (message instanceof TextMessage) {
-            TextMessage textMessage = (TextMessage)message;
+            TextMessage textMessage = (TextMessage) message;
             String json = textMessage.getText();
             try {
                 email = mapper.readValue(json, Email.class);
