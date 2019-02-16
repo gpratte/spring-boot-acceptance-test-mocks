@@ -54,6 +54,12 @@ In the ActiveMQ browser set the Type to TEXT and set the body to
 }
 and hit send.
 
+Here is a screen shot 
+
+![alt text][logo]
+
+[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
+
 Spring boot complains 
 `MessageConversionException: Could not find type id property [_type]`
 
