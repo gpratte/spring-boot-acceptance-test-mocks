@@ -56,7 +56,7 @@ and hit send.
 
 Here is a screen shot 
 
-![alt text](relative/this-and-that/img/activemq-send-mailbox-queue.png?raw=true "ActiveMQ send message")
+![alt text](this-and-that/img/activemq-send-mailbox-queue.png?raw=true "ActiveMQ send message")
 
 Spring boot complains 
 `MessageConversionException: Could not find type id property [_type]`
