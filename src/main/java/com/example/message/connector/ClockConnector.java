@@ -7,7 +7,8 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class ClockConnector {
 
-    private static final String URL = "http://worldclockapi.com/api/json/utc/now";
+    //private static final String URL = "http://worldclockapi.com/api/json/utc/now";
+    private static final String URL = "http://localhost:9999/api/json/utc/now";
 
     private final RestTemplate restTemplate;
 

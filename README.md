@@ -112,6 +112,34 @@ To keep this simple called
 http://worldclockapi.com/api/json/utc/now
 ```
 
+## 07-wiremock-and-cucumber
 
+Mock the REST call for acceptance testing by using an embedded wiremock server.
+
+Started by using Spring Cloud Contract wiremock http://wiremock.org/docs/spring-boot/
+
+The problem I could not get around is that the wiremock endpoint did not work for cucumber tests. It still would not work if running the cucumber tests from JUnit.
+
+Removed the Spring wiremock dependency 
+```
+testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-stub-runner'
+```
+
+And instead used just wiremock
+```
+testImplementation 'com.github.tomakehurst:wiremock:2.4.1'
+```
+Again this did not work when running the feature as a cucumber test but did work running the feature from JUnit. See CucumberOneTest.java.
+
+When I added a second feature then cucumber complained about too many glue classes configuring Spring Boot. Solved this my moving the step definition classes into their own package and setting the cucumber options glue. Again see CucumberOneTest.java and CucumberTwoTest.java as well.
+
+The test run in IntelliJ by running the JUnit test (CucumberOneTest) directly but also run on the command line 
+```
+gradle clean test
+``` 
 
 .
+
+
+
+
