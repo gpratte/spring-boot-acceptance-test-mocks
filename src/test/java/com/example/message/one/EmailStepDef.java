@@ -34,10 +34,6 @@ public class EmailStepDef extends SpringBootBaseIntegrationTest {
         wireMockServer.start();
         configureFor("localhost", wireMockServer.port());
 
-        stubFor(get(urlEqualTo("/api/json/utc/now"))
-            .willReturn(aResponse().withHeader("Content-Type", "application/json").withBody("{\"$id\":\"123\",\"currentDateTime\":\"2019-01-01T21:09Z\",\"utcOffset\":\"00:00:00\",\"isDayLightSavingsTime\":false,\"dayOfTheWeek\":\"Friday\",\"timeZoneName\":\"UTC\",\"currentFileTime\":131948249734579777,\"ordinalDate\":\"2019-47\",\"serviceResponse\":null}")));
-
-        clockConnector.getCurrent();
     }
 
     @After
@@ -51,6 +47,26 @@ public class EmailStepDef extends SpringBootBaseIntegrationTest {
             .to("nobody@example.com")
             .body("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque scelerisque, enim in congue consequat, ligula.")
             .build();
+
+        stubFor(get(urlEqualTo("/api/json/utc/now"))
+            .willReturn(aResponse().withHeader("Content-Type", "application/json").withBody("{\"$id\":\"123\",\"currentDateTime\":\"2019-01-01T21:09Z\",\"utcOffset\":\"00:00:00\",\"isDayLightSavingsTime\":false,\"dayOfTheWeek\":\"Friday\",\"timeZoneName\":\"UTC\",\"currentFileTime\":131948249734579777,\"ordinalDate\":\"2019-47\",\"serviceResponse\":null}")));
+
+        clockConnector.getCurrent();
+
+    }
+
+    @Given("email is composed to anybody")
+    public void composeToAnybody() {
+        email = Email.builder()
+            .to("anybody@example.com")
+            .body("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque scelerisque, enim in congue consequat, ligula.")
+            .build();
+
+        stubFor(get(urlEqualTo("/api/json/utc/now"))
+            .willReturn(aResponse().withHeader("Content-Type", "application/json").withBody("{\"$id\":\"123\",\"currentDateTime\":\"2019-12-12T21:09Z\",\"utcOffset\":\"00:00:00\",\"isDayLightSavingsTime\":false,\"dayOfTheWeek\":\"Friday\",\"timeZoneName\":\"UTC\",\"currentFileTime\":131948249734579777,\"ordinalDate\":\"2019-47\",\"serviceResponse\":null}")));
+
+        clockConnector.getCurrent();
+
     }
 
     @When("the email is published to the queue")
