@@ -38,7 +38,7 @@ public class TodoStepDef extends SpringBootBaseIntegrationTest {
         wireMockServer.stop();
     }
 
-    @Given("Given todo grocery shop is composed\n")
+    @Given("todo grocery shop is composed")
     public void groceryShop() {
         todo = Todo.builder()
             .description("Grocery shop")
