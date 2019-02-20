@@ -142,6 +142,22 @@ gradle clean test
 ## 08-refactor-email-to-todo
 Changed the message from an _Email_ to a _Todo_
 
+
+## 09-external-database
+
+Persist a _Todo_ to an external database. 
+
+See the /this-and-that/sql/postgres-setup.sql to create a user, database and table.
+
+Added the following to the build.gradle
+ * implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+ * runtimeOnly 'org.postgresql:postgresql'
+ 
+Added the TodoRepository
+ 
+Add the _spring.datasource.*_ properties to application.properties
+
+
 .
 
 
