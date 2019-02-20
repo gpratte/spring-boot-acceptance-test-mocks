@@ -2,7 +2,7 @@ package com.example.message.service;
 
 import com.example.message.connector.ClockConnector;
 import com.example.message.model.CurrentDateTime;
-import com.example.message.model.Email;
+import com.example.message.model.Todo;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,10 +15,10 @@ public class Orchestrator {
     }
 
     /**
-     * Orchestrate by getting the email and then calling a rest endpoint.
-     * @param email
+     * Orchestrate by getting the todo and then calling a rest endpoint.
+     * @param todo
      */
-    public void processEmail(Email email) {
+    public void processTodo(Todo todo) {
         CurrentDateTime currentDateTime = clockConnector.getCurrent();
         System.out.println("Current Date Time " + currentDateTime);
     }

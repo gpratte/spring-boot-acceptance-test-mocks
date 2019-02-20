@@ -1,6 +1,6 @@
 package com.example.message.config;
 
-import com.example.message.connector.EmailMessageConverter;
+import com.example.message.connector.TodoMessageConverter;
 import org.springframework.boot.autoconfigure.jms.DefaultJmsListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,7 +26,7 @@ public class JmsListenerConfig {
 
     @Bean // Serialize message content to json using TextMessage
     public MessageConverter messageConverter() {
-        return new EmailMessageConverter();
+        return new TodoMessageConverter();
     }
 
 }

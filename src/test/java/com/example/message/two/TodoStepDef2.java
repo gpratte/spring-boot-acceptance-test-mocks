@@ -1,16 +1,13 @@
 package com.example.message.two;
 
 import com.example.message.SpringBootBaseIntegrationTest;
-import com.example.message.model.Email;
+import com.example.message.model.Todo;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Ignore;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.configureFor;
@@ -25,9 +22,9 @@ import static com.github.tomakehurst.wiremock.client.WireMock.verify;
  * The CucumberOneTest class is used to run the features when testing with JUnit.
  */
 @Ignore
-public class EmailStepDef2 extends SpringBootBaseIntegrationTest {
+public class TodoStepDef2 extends SpringBootBaseIntegrationTest {
 
-    private Email email;
+    private Todo todo;
 
     @Before
     public void before() {
@@ -45,17 +42,18 @@ public class EmailStepDef2 extends SpringBootBaseIntegrationTest {
         wireMockServer.stop();
     }
 
-    @Given("email is composed")
-    public void compose() {
-        email = Email.builder()
-            .to("nobody@example.com")
-            .body("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque scelerisque, enim in congue consequat, ligula.")
+    @Given("todo exercise is composed")
+    public void exercies() {
+        todo = Todo.builder()
+            .description("exercise")
+            .priority(2)
+            .done(false)
             .build();
     }
 
-    @When("the email is published to the queue")
+    @When("the todo is published to the queue")
     public void publish() {
-        this.sendEmail(email);
+        this.sendTodo(todo);
     }
 
     @Then("the rest call should happen")

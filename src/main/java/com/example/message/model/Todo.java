@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Email {
-    private String to;
-    private String body;
+public class Todo {
+    private String description;
+    private Integer priority;
+    private Boolean done;
 }

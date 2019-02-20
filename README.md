@@ -50,8 +50,9 @@ Brought up Spring Boot and no complaints.
 In the ActiveMQ browser set the Type to TEXT and set the body to
 ```
 {  
-   "to" : "gpratte",
-   "body" : "hi there"
+   "description" : "car service",
+   "priority" : 1,
+   "done" : false
 }
 ```
 and hit send.
@@ -137,6 +138,9 @@ The test run in IntelliJ by running the JUnit test (CucumberOneTest) directly bu
 ```
 gradle clean test
 ``` 
+
+## 08-refactor-email-to-todo
+Changed the message from an _Email_ to a _Todo_
 
 .
 

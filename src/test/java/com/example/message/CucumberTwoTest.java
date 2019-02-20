@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
  */
 @RunWith(Cucumber.class)
 @CucumberOptions(
-    features = "src/test/resources/features/email2.feature",
+    features = "src/test/resources/features/todo2.feature",
     glue = "com.example.message.two")
 public class CucumberTwoTest {
 }
