@@ -1,9 +1,24 @@
 # spring-boot-acceptance-test-mocks
-Spring Boot project that connects to various resources (database, mongo, rest calls, JMS messaging, Rabbit messaging, legacy). Mock the connections for acceptance testing.
+A Spring Boot project that connects to various resources (database, mongo, rest calls, JMS messaging, Rabbit messaging, legacy). Mock the connections for acceptance testing.
 
-As always I will build up the server in multiple steps. I will code each step on a new branch.
+The flow is...
+1. Receive a __Todo__ message
+2. Make a REST call (for no good reason)
+3. Persist the __Todo__ in a relational database
+
+The server is setup to 
+1. Listen to the _mailbox_ queue of an external JMS ActiveMQ server
+2. Makes a REST call to http://worldclockapi.com/api/json/utc/now
+3. Inserts into a Postgres database
+
+When running tests the server uses
+1. An embedded ActiveMQ server
+2. Wiremock to mock the REST calls
+3. An embedded H2 in memory database
 
 # Branches
+As always I will build up the server in multiple steps. I will code each step on a new branch.
+
 ## 01-spring-initalizr
 Create a Spring Boot project using Spring Inializr https://start.spring.io/
 
