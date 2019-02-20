@@ -157,7 +157,18 @@ Added the TodoRepository
  
 Add the _spring.datasource.*_ properties to application.properties
 
+## 10-embedded-H2-database
 
+Used an embedded H2 in memory database instead of the external postgres database.
+
+Added the following dependency
+ * _testImplementation 'com.h2database:h2'_
+
+See the PostgresConfig and the H2Config classes to see how the postgres datasource is wired when running the application and the H2 datasource is used when running the tests.
+
+Had to set the active profile in the tests to _@ActiveProfiles("test")_
+
+Had to sleep in the Then steps of the cucumber tests because the sending/receiving the JMS message is asynchronous (duh). Hence the verification had to wait for the message to get received and processed.
 .
 
 

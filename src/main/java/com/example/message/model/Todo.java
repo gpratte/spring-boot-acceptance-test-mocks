@@ -18,8 +18,7 @@ import javax.persistence.Id;
 public class Todo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String description;
     private Integer priority;
     private Boolean done;

@@ -24,8 +24,9 @@ public class Orchestrator {
      */
     @Transactional
     public void processTodo(Todo todo) {
-        todoRepository.save(todo);
         CurrentDateTime currentDateTime = clockConnector.getCurrent();
         System.out.println("Current Date Time " + currentDateTime);
+        todo.setId(System.currentTimeMillis());
+        todoRepository.save(todo);
     }
 }

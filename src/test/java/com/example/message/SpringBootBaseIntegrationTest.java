@@ -1,8 +1,11 @@
 package com.example.message;
 
 import com.example.message.connector.ClockConnector;
+import com.example.message.model.CurrentDateTime;
 import com.example.message.model.Todo;
 import com.github.tomakehurst.wiremock.WireMockServer;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +13,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.configureFor;
+import static com.github.tomakehurst.wiremock.client.WireMock.get;
+import static com.github.tomakehurst.wiremock.client.WireMock.getRequestedFor;
+import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
+import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
+import static com.github.tomakehurst.wiremock.client.WireMock.verify;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 
 /**

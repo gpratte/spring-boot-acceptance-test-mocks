@@ -17,7 +17,6 @@ public class ClockConnector {
     }
 
     public CurrentDateTime getCurrent() {
-        CurrentDateTime currentDateTime =  restTemplate.getForObject(url, CurrentDateTime.class);
-        return currentDateTime;
+        return restTemplate.getForObject(url, CurrentDateTime.class);
     }
 }
