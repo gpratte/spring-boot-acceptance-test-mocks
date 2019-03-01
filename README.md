@@ -1,8 +1,10 @@
 # spring-boot-acceptance-test-mocks
 A Spring Boot project that connects to various resources (database, mongo, rest calls, JMS messaging, Rabbit messaging, legacy). Mock the connections for acceptance testing.
 
-The flow is...
-1. Receive a __Todo__ message
+There are a couple of flows
+
+#### Listen to JMS message flow...
+1. Receive a __Todo__ JMS message
 2. Make a REST call (for no good reason)
 3. Persist the __Todo__ in a relational database
 
@@ -11,6 +13,15 @@ The server is setup to
 2. Makes a REST call to http://worldclockapi.com/api/json/utc/now
 3. Inserts into a Postgres database
 
+#### REST POST to create a Todo...
+1. POST to the /api/todos endpoint
+2. Persist the __Todo__ in a relational database
+
+The server is setup 
+1. With a RestController with a PostMapping on /api/todos
+2. Calls a service which calls the repository to insert into a Postgres database
+
+#### Embedded servers
 When running tests the server uses
 1. An embedded ActiveMQ server
 2. Wiremock to mock the REST calls
