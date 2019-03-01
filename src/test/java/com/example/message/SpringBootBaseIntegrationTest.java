@@ -27,7 +27,7 @@ import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options
  * The CucumberOneTest class is used to run the features when testing with JUnit.
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @Ignore
 public class SpringBootBaseIntegrationTest {
 

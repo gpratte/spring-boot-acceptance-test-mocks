@@ -186,6 +186,18 @@ Had to set the active profile in the tests to _@ActiveProfiles("test")_
 Had to sleep in the Then steps of the cucumber tests because the sending/receiving the JMS message is asynchronous (duh). Hence the verification had to wait for the message to get received and processed.
 .
 
+## 11-rest-controller
 
+Added a controller to expose a REST endpoint to POST a Todo.
+
+Here is a curl to hit the endpoint and create a Todo
+
+```
+curl -X POST -H "Content-Type: application/json" -d '{"description":"Go through paperwork", "priority":2, "done":false}' http://localhost:8080/api/todos
+```
+Here are the new files for the cucumber testing
+* rest-create-todo.feature
+* RestCreateTodoTest.java
+* RestCreateTodoStepDef.java
 
 
