@@ -16,10 +16,12 @@ The server is setup to
 #### REST POST to create a Todo...
 1. POST to the /api/todos endpoint
 2. Persist the __Todo__ in a relational database
+3. Send the __Todo__ as json to RabbitMQ
 
 The server is setup 
 1. With a RestController with a PostMapping on /api/todos
-2. Calls a service which calls the repository to insert into a Postgres database
+2. The controller calls a service which calls the repository to insert into a Postgres database
+3. The service also sends json to RabbitMQ 
 
 #### Embedded servers
 When running tests the server uses
