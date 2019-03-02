@@ -6,13 +6,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jms.core.JmsTemplate;
 
 @SpringBootApplication
-public class MessageApplication {
+public class Application {
 
     @Autowired
     private JmsTemplate jmsTemplate;
 
     public static void main(String[] args) {
-        SpringApplication.run(MessageApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
 }

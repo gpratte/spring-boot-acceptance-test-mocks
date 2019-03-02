@@ -211,4 +211,22 @@ Here are the new files for the cucumber testing
 * RestCreateTodoTest.java
 * RestCreateTodoStepDef.java
 
+## 12-send-to-rabbitmq
+
+Installed RabbitMQ standalone on my system.
+
+Added the managment plugin to be able to use the web based management console. In the managment console
+
+* Created a _todo-exchange_
+* Created a _todo_ queue
+* Added a binding in the _todo_ queue for the _todo-exchange_ with the _todo-key_ routing key
+
+Could not run RabbitMQ and ActiveMQ at the same time because they both are using port 5672 for amqp. Changes the ActiveMQ amqp port to 5673.
+
+Added the following dependency to the build.gradle
+* _org.springframework.boot:spring-boot-starter-amqp_
+
+In the _TodoService_ class sent the todo as json to RabbitMQ.
+
+
 
