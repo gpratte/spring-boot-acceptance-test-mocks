@@ -214,6 +214,8 @@ Here are the new files for the cucumber testing
 * RestCreateTodoTest.java
 * RestCreateTodoStepDef.java
 
+The controller calls a service which calls the repository to persist the Todo in the database.
+
 ## 12-send-to-rabbitmq
 
 #### RabbitMQ
@@ -230,7 +232,7 @@ Could not run RabbitMQ and ActiveMQ at the same time because they both are using
 Added the following dependency to the build.gradle
 * _org.springframework.boot:spring-boot-starter-amqp_
 
-In the _TodoService_ class sent the todo as json to RabbitMQ.
+The _TodoService_ class sends the Todo as JSON to RabbitMQ.
 
 #### Qpid
 
@@ -240,15 +242,15 @@ Installed it and configure it so it has the same exchange, queue and binding as 
 
 Changed the console port from 8080 to 8889 since the Spring Boot application uses 8080.
 
-Hand to add 
+Had to add 
 ```
 "secureOnlyMechanisms": [],
 ```
-to the json for the _authenticationproviders_ property in the config.json to get past the authentication error when sending the message.
+to the _authenticationproviders_ property in the config.json to get past the authentication error when sending the message.
 
 #### Embedded Qpid
 
-When running the cucumber test (e.g. RestCreateTodoTest) then use an embedded Qpid server for the mocking the RabbitMQ server.
+Use an embedded Qpid server for the mocking the RabbitMQ server when running the cucumber test (e.g. RestCreateTodoTest).
 
 Added the _qpid_config.json_ file because Qpid needs this when starting up to configure the server.
 
