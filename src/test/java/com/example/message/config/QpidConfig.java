@@ -11,6 +11,7 @@ import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -25,34 +26,47 @@ public class QpidConfig {
     String qpidHomeDir = "spring-boot-acceptance-test-mocks";
     String configFileName = "src/test/resources/qpid-config.json";
 
-    public final static String EXCHANGE_NAME = "todo-exchange";
-    public final static String QUEUE_NAME = "todo";
-    public final static String ROUTING_KEY = "todo-key";
+    private final String exchangeName;
+    private final String queueName;
+    private final String routingKey;
+
+    public QpidConfig(@Value("${rabbitmq.exchange}") String exchangeName,
+                      @Value("${rabbitmq.queue}") String queueName,
+                      @Value("${rabbitmq.routing.key}") String routingKey) {
+        this.exchangeName = exchangeName;
+        this.queueName = queueName;
+        this.routingKey = routingKey;
+    }
 
     @Bean
     TopicExchange exchange() {
-        return new TopicExchange(EXCHANGE_NAME);
+        return new TopicExchange(exchangeName);
     }
 
     @Bean
     Queue queue() {
-        return new Queue(QUEUE_NAME, false);
+        return new Queue(queueName, false);
     }
 
     @Bean
     Binding binding(Queue queue, TopicExchange exchange) {
         return BindingBuilder.bind(queue)
             .to(exchange)
-            .with(ROUTING_KEY);
+            .with(routingKey);
     }
 
     @Bean
     Broker broker() throws Exception {
         Broker broker=new Broker();
         broker.startup(brokerOptions());
+
         return broker;
     }
 
+    /**
+     * Need to configure Qpid.
+     * @See https://qpid.apache.org/releases/qpid-java-6.0.5/java-broker/book/Java-Broker-Initial-Configuration-Configuration-Properties.html
+     */
     @Bean
     BrokerOptions brokerOptions() {
 
@@ -83,7 +97,7 @@ public class QpidConfig {
                                              MessageListenerAdapter listenerAdapter) {
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
         container.setConnectionFactory(connectionFactory);
-        container.setQueueNames(QUEUE_NAME);
+        container.setQueueNames(queueName);
         container.setMessageListener(listenerAdapter);
         return container;
     }

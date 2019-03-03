@@ -8,14 +8,15 @@ import java.util.List;
 @Component
 public class AmqpReceiver {
 
-    private List<String> messages = new ArrayList<>();
+    private static List<String> messages = new ArrayList<>();
 
     public void receiveMessage(String message) {
         System.out.println("Received <" + message + ">");
         messages.add(message);
+        System.out.println("!!! added message " + messages.size());
     }
 
-    public List<String> getMessages() {
+    public static List<String> getMessages() {
         return messages;
     }
 }

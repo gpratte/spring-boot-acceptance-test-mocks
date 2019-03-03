@@ -247,5 +247,11 @@ to the json for the _authenticationproviders_ property in the config.json to get
 
 #### Embedded Qpid
 
+When running the cucumber test (e.g. RestCreateTodoTest) then use an embedded Qpid server for the mocking the RabbitMQ server.
 
+Added the _qpid_config.json_ file because Qpid needs this when starting up to configure the server.
+
+Added the _QpidConfig_ file which starts the broker and creates the exchange, queue and binding (for the routing key).
+
+Updated the _RestCreateTodoStepDef_ test to check if the message sent to rabbit (qpid) was received.
 

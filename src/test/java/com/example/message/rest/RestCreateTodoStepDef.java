@@ -66,10 +66,30 @@ public class RestCreateTodoStepDef extends SpringBootBaseIntegrationTest {
         // Check database
         Todo todoPersisted = todoRepository.findOne(id);
         Assert.assertEquals("should have found todo in H2 database", id, todoPersisted.getId());
-        // Check message received
-        Assert.assertEquals("should be one message received", 1, amqpReceiver.getMessages().size());
+        // The message is asynchronous so give it some time to be delivered and acted upon.
+        long start = System.currentTimeMillis();
+        long now = System.currentTimeMillis();
+        // wait 3 seconds (3000 millis) for the todo show up in RabbitMQ
+        while (now - start < 3000l) {
+            try {
+                // Sleep for 1/2 a second
+                Thread.sleep(500l);
+            } catch (Exception e) {
+                // do nothing
+            }
 
-        String message = amqpReceiver.getMessages().get(0);
+            System.out.println("!!! checking size " + AmqpReceiver.getMessages().size());
+            if (amqpReceiver.getMessages().size() == 1) {
+                break;
+            }
+
+            now = System.currentTimeMillis();
+        }
+
+        // Check message received
+        Assert.assertEquals("should be one message received", 1, AmqpReceiver.getMessages().size());
+
+        String message = AmqpReceiver.getMessages().get(0);
         Assert.assertTrue("description should match", message.indexOf(todo.getDescription()) > 0);
     }
 }
