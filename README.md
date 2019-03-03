@@ -25,9 +25,10 @@ The server is setup
 
 #### Embedded servers
 When running tests the server uses
-1. An embedded ActiveMQ server
+1. An embedded ActiveMQ server (to mock JMS)
 2. Wiremock to mock the REST calls
 3. An embedded H2 in memory database
+4. An embedded Qpid server (to mock RabbitMQ)
 
 # Branches
 As always I will build up the server in multiple steps. I will code each step on a new branch.
