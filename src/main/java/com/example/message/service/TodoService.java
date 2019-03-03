@@ -34,7 +34,6 @@ public class TodoService {
         long id = todoRepository.save(todo).getId();
 
         String todoAsJson = objectMapper.writeValueAsString(todo);
-
         rabbitTemplate.convertAndSend(rabbitExchange, rabbitRoutingKey, todoAsJson);
         return id;
     }

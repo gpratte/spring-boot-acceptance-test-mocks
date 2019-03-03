@@ -1,6 +1,7 @@
 package com.example.message.rest;
 
 import com.example.message.SpringBootBaseIntegrationTest;
+import com.example.message.message.AmqpReceiver;
 import com.example.message.model.Todo;
 import com.example.message.repository.TodoRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -29,6 +30,9 @@ public class RestCreateTodoStepDef extends SpringBootBaseIntegrationTest {
 
     @Autowired
     private TodoRepository todoRepository;
+
+    @Autowired
+    private AmqpReceiver amqpReceiver;
 
     @Given("todo paperword is composed")
     public void composeTodo() {
@@ -62,5 +66,10 @@ public class RestCreateTodoStepDef extends SpringBootBaseIntegrationTest {
         // Check database
         Todo todoPersisted = todoRepository.findOne(id);
         Assert.assertEquals("should have found todo in H2 database", id, todoPersisted.getId());
+        // Check message received
+        Assert.assertEquals("should be one message received", 1, amqpReceiver.getMessages().size());
+
+        String message = amqpReceiver.getMessages().get(0);
+        Assert.assertTrue("description should match", message.indexOf(todo.getDescription()) > 0);
     }
 }

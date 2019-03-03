@@ -215,6 +215,7 @@ Here are the new files for the cucumber testing
 
 ## 12-send-to-rabbitmq
 
+#### RabbitMQ
 Installed RabbitMQ standalone on my system.
 
 Added the managment plugin to be able to use the web based management console. In the managment console
@@ -229,6 +230,22 @@ Added the following dependency to the build.gradle
 * _org.springframework.boot:spring-boot-starter-amqp_
 
 In the _TodoService_ class sent the todo as json to RabbitMQ.
+
+#### Qpid
+
+Apache's Qpid is another ampq 0_9_1 message server 
+
+Installed it and configure it so it has the same exchange, queue and binding as was done for RabbitMQ above.
+
+Changed the console port from 8080 to 8889 since the Spring Boot application uses 8080.
+
+Hand to add 
+```
+"secureOnlyMechanisms": [],
+```
+to the json for the _authenticationproviders_ property in the config.json to get past the authentication error when sending the message.
+
+#### Embedded Qpid
 
 
 
