@@ -13,15 +13,15 @@ The server is setup to
 2. Makes a REST call to http://worldclockapi.com/api/json/utc/now
 3. Inserts into a Postgres database
 
-#### REST POST to create a Todo...
-1. POST to the /api/todos endpoint
+#### REST POST to create a Todo flow...
+1. Expose a POST endpoint to create a Todo
 2. Persist the __Todo__ in a relational database
-3. Send the __Todo__ as json to RabbitMQ
+3. Send the __Todo__ as JSON to RabbitMQ
 
 The server is setup 
 1. With a RestController with a PostMapping on /api/todos
 2. The controller calls a service which calls the repository to insert into a Postgres database
-3. The service also sends json to RabbitMQ 
+3. The service also sends JSON to RabbitMQ 
 
 #### Embedded servers
 When running tests the server uses
