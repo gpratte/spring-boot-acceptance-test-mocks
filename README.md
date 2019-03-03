@@ -1,7 +1,12 @@
 # spring-boot-acceptance-test-mocks
 A Spring Boot project that connects to various resources (database, mongo, rest calls, JMS messaging, Rabbit messaging, legacy). Mock the connections for acceptance testing.
 
-There are a couple of flows
+#### Embedded servers
+When running tests the server uses
+1. An embedded ActiveMQ server (to mock JMS)
+2. Wiremock to mock the REST calls
+3. An embedded H2 in-memory database
+4. An embedded Qpid server (to mock RabbitMQ)
 
 #### Listen to JMS message flow...
 1. Receive a __Todo__ JMS message
@@ -22,13 +27,6 @@ The server is setup
 1. With a RestController with a PostMapping on /api/todos
 2. The controller calls a service which calls the repository to insert into a Postgres database
 3. The service also sends JSON to RabbitMQ 
-
-#### Embedded servers
-When running tests the server uses
-1. An embedded ActiveMQ server (to mock JMS)
-2. Wiremock to mock the REST calls
-3. An embedded H2 in memory database
-4. An embedded Qpid server (to mock RabbitMQ)
 
 # Branches
 As always I will build up the server in multiple steps. I will code each step on a new branch.
@@ -188,7 +186,7 @@ Add the _spring.datasource.*_ properties to application.properties
 
 ## 10-embedded-H2-database
 
-Used an embedded H2 in memory database instead of the external postgres database.
+Used an embedded H2 in-memory database instead of the external postgres database.
 
 Added the following dependency
  * _testImplementation 'com.h2database:h2'_
